@@ -4,13 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    </link>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>CA NPS Camping Planner</title>
 </head>
 
 <body>
-    <header class="jumbotron">
-        <h1>California National Park Camping Planner</h1>
+    <!-- Hero with Title of Page -->
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    California Camping Planner
+                </h1>
+                <h2 class="subtitle">
+                    Your guide to our National Parks
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="user-form">
         <!-- Form for campers to complete their information -->
         <form>
             <label for="name">Enter name:</label>
@@ -22,21 +36,43 @@
             <label for="loc">Location</label>
             <input type="text" placeholder="City, State" name="loc" id="loc" />
         </form>
-    </header>
-    <div class="container">
-        <!-- Add cards for National Parks -->
-        <div class="nps-card" id="channel"></div>
-        <div class="nps-card" id="deathvalley"></div>
-        <div class="nps-card" id="joshua"></div>
-        <div class="nps-card" id="lassen"></div>
-        <div class="nps-card" id="pinnacles"></div>
-        <div class="nps-card" id="redwood"></div>
-        <div class="nps-card" id="sequoia"></div>
-        <div class="nps-card" id="kings"></div>
-        <div class="nps-card" id="yosemite"></div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
-    </script>
+    </section>
+    <section class="nps">
+        <div class="container">
+            <div class="columns">
+                <!-- Add cards for National Parks -->
+                <div class="column">
+                    <div class="card box" id="channel">Channel Islands</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="deathvalley">Death Valley</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="joshua">Joshua Tree</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="lassen">Lassen</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="pinnacles">Pinnacles</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="redwood">Redwood</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="sequoia">Sequoia & King's Canyon</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="yosemite">Yosemite</div>
+                </div>
+            </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
