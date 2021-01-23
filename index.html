@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>CA NPS Camping Planner</title>
+</head>
+
+<body>
+    <header class="jumbotron">
+        <h1>California National Park Camping Planner</h1>
+        <!-- Form for campers to complete their information -->
+        <form>
+            <label for="name">Enter name:</label>
+            <input type="text" placeholder="Your Name" name="name" id="name" />
+            <label for="email">Enter email address:</label>
+            <input type="email" placeholder="Email Address" name="email" id="email" />
+            <label for="dates">Travel Dates:</label>
+            <input type="text" placeholder="MM-DD-YYYY" name="dates" id="dates" />
+            <label for="loc">Location</label>
+            <input type="text" placeholder="City, State" name="loc" id="loc" />
+        </form>
+    </header>
+    <div class="container">
+        <!-- Add cards for National Parks -->
+        <div class="nps-card" id="channel"></div>
+        <div class="nps-card" id="deathvalley"></div>
+        <div class="nps-card" id="joshua"></div>
+        <div class="nps-card" id="lassen"></div>
+        <div class="nps-card" id="pinnacles"></div>
+        <div class="nps-card" id="redwood"></div>
+        <div class="nps-card" id="sequoia"></div>
+        <div class="nps-card" id="kings"></div>
+        <div class="nps-card" id="yosemite"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+    </script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
