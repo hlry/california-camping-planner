@@ -1,3 +1,18 @@
 section {
     margin-bottom: 20px;
 }
+
+.buffer-left {
+    margin-left: 25px;
+}
+
+/* Begin with hiding Google API map */
+.show-hide {
+    display: none;
+} 
+
+/* Onclick event for cards to display .show-hide section. */
+/* .card:onclick {
+    display: display-listitem;
+} */
+
