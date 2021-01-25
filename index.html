@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    </link>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>CA NPS Camping Planner</title>
 </head>
+
 <body>
-    
+    <!-- Hero with Title of Page -->
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    California Camping Planner
+                </h1>
+                <h2 class="subtitle">
+                    Your guide to our National Parks
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="user-form">
+        <!-- Form for campers to complete their information -->
+        <form>
+            <label for="name">Enter name:</label>
+            <input type="text" placeholder="Your Name" name="name" id="name" />
+            <label for="email">Enter email address:</label>
+            <input type="email" placeholder="Email Address" name="email" id="email" />
+            <label for="dates">Travel Dates:</label>
+            <input type="text" placeholder="MM-DD-YYYY" name="dates" id="dates" />
+            <label for="loc">Location</label>
+            <input type="text" placeholder="City, State" name="loc" id="loc" />
+        </form>
+    </section>
+    <section class="nps">
+        <div class="container">
+            <div class="columns">
+                <!-- Add cards for National Parks -->
+                <div class="column">
+                    <div class="card box" id="channel">Channel Islands</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="deathvalley">Death Valley</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="joshua">Joshua Tree</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="lassen">Lassen</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="pinnacles">Pinnacles</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="redwood">Redwood</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="sequoia">Sequoia & King's Canyon</div>
+                </div>
+                <div class="column">
+                    <div class="card box" id="yosemite">Yosemite</div>
+                </div>
+            </div>
+    </section>
+    <section>
+        <!-- Modal Pop Up when NP is clicked -->
+        <div class="modal" id="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head" id="modal-card-head">
+                <p class="modal-card-title">Channel Islands</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                <div id="image"> <img src=''></div>
+                <div id="location"></div>
+                <div id="description"></div>
+                <div id="weather"></div>
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button cancel">Cancel</button>
+              </footer>
+            </div>
+          </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/NPS.js"></script>
 </body>
+
 </html>
