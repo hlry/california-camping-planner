@@ -1,16 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Simple Map</title>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    </link>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <title>CA NPS Camping Planner</title>
 </head>
 
 <body>
+    <!-- Hero with Title of Page -->
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    California Camping Planner
+                </h1>
+                <h2 class="subtitle">
+                    Your guide to our National Parks
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form for campers to complete their information -->
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">User Information</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Content ... -->
+                <form id="form">
+
+                    <div class="form-group">
+                        <label for="name">Enter name:</label>
+                        <input type="text" placeholder="Your Name" name="name" id="name" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email">Enter email address:</label>
+                        <input type="email" placeholder="Email Address" name="email" id="email" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="dates">Travel Dates:</label>
+                        <input type="text" placeholder="MM-DD-YYYY" name="dates" id="dates" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="loc">Location</label>
+                        <button id="find-me" type="button">Show my location</button><br/>
+                        <p id="status"></p>
+                        <a id="map-link" target="_blank"></a>
+                    </div>
+                </form>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <section class="nps-closest">
+        <div class="container">
+            <div class="closest columns">
+                <!-- Add cards for National Parks -->
+                <div class="closest-column column">
+                    <div class="closest-cards card box"></div>
+                </div>
+                <div class="closest-column column">
+                    <div class="closest-cards card box"></div>
+                </div>
+                <div class="closest-column column">
+                    <div class="closest-cards card box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nps-furthest">
+        <div class="container">
+            <div class="furthest columns">
+                <div class="furthest-column column">
+                    <div class="card box"></div>
+                </div>
+                <div class="furthest-column column">
+                    <div class="card box"></div>
+                </div>
+                <div class="furthest-column column">
+                    <div class="card box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Map Container-->
     <div id="mapContainer"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 

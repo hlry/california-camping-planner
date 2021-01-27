@@ -1,3 +1,8 @@
+section {
+    margin-bottom: 20px;
+}
+
+
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
@@ -13,4 +18,21 @@ html body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.nps-closest {
+    display: none;
+}
+
+.nps-furthest {
+    display: none;
+}
+
+.start-button {
+    display: flex;
+    justify-content: space-around;
+}
+
+#img-btn {
+    border: none;
 }
