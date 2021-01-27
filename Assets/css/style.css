@@ -1,3 +1,11 @@
 section {
     margin-bottom: 20px;
 }
+
+.card {
+    opacity: 0.3;
+}
+
+.card:hover {
+    opacity: 0.9;
+}
