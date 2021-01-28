@@ -15,6 +15,10 @@
 <body>
     <!-- Hero with Title of Page -->
     <section class="hero is-medium is-primary is-bold">
+        <div class="user">
+            <button id="changeuser" class="button is-primary is-light">Change User</button>
+        </div>
+
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
@@ -28,7 +32,7 @@
     </section>
 
     <!-- Form for campers to complete their information -->
-    <div class="modal">
+    <div class="modal user-info">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -39,25 +43,25 @@
                 <!-- Content ... -->
                 <form id="form">
 
-                    <div class="form-group">
+                    <div class="form-group" id="name">
                         <label for="name">Enter name:</label>
                         <input type="text" placeholder="Your Name" name="name" id="name" />
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group" id="email">
                         <label for="email">Enter email address:</label>
                         <input type="email" placeholder="Email Address" name="email" id="email" />
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group" id="traveldates">
                         <label for="dates">Travel Dates:</label>
-                        <input type="text" placeholder="MM-DD-YYYY" name="dates" id="dates" />
+                        <input type="date" placeholder="MM-DD-YYYY" name="dates" id="dates" />
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group" id="location">
                         <label for="loc">Location</label>
                         <button id="find-me" type="button">Show my location</button><br/>
                         <p id="status"></p>
@@ -67,47 +71,194 @@
             </section>
 
             <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
+                <button class="button is-success" id="submit">Submit</button>
                 <button class="button">Cancel</button>
             </footer>
         </div>
     </div>
 
     <section class="nps-closest">
+        <h2>Closest</h2>
         <div class="container">
             <div class="closest columns">
                 <!-- Add cards for National Parks -->
                 <div class="closest-column column">
-                    <div class="closest-cards card box"></div>
+                    <div class="card box">
+
+                        <header class="closest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable closest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
+
                 <div class="closest-column column">
-                    <div class="closest-cards card box"></div>
+                    <div class="card box">
+
+                        <header class="closest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable closest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
+
                 <div class="closest-column column">
-                    <div class="closest-cards card box"></div>
+                    <div class="card box">
+
+                        <header class="closest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable closest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer>
+                            <a>
+                                <span>
+                                <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                            </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="nps-furthest">
+        <h2>Farthest</h2>
         <div class="container">
             <div class="furthest columns">
                 <div class="furthest-column column">
-                    <div class="card box"></div>
+                    <div class="card box">
+
+                        <header class="furthest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable furthest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
                 <div class="furthest-column column">
-                    <div class="card box"></div>
+                    <div class="card box">
+
+                        <header class="furthest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable furthest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
                 <div class="furthest-column column">
-                    <div class="card box"></div>
+                    <div class="card box">
+
+                        <header class="furthest-header card-header is-linkable">
+                            <p class="card-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable furthest-image">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#2ecc71"><path d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z"></path></g></g></svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!--Map Container-->
-    <div id="mapContainer"></div>
+    <section class="park-info">
+        <!-- Modal Pop Up when NP is clicked -->
+        <div class="modal" id="park-modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head" id="modal-card-head">
+                    <p class="modal-card-title"></p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div id="image"> <img src=''></div>
+                    <div id="location"></div>
+                    <div id="description"></div>
+                    <div id="weather"></div>
+                    <!--Map Container-->
+                    <div id="mapContainer"></div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Save changes</button>
+                    <button class="button cancel">Cancel</button>
+                </footer>
+            </div>
+        </div>
+    </section>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

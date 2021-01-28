@@ -2,26 +2,127 @@ var parks = [{
         name: "Yosemite",
         latitude: "37.756718",
         longitude: "-119.596848",
+        parkCode: 'yose',
     },
 
     {
-        name: "Sequoia",
+        name: "Sequoia & Kings Canyon",
         latitude: "36.4333166",
         longitude: "-118.6836173",
+        parkCode: 'seki',
     },
 
     {
         name: "Redwood",
         latitude: "41.213181",
         longitude: "-124.004631",
+        parkCode: 'redw',
     },
 
     {
         name: "Joshua Tree",
         latitude: "33.881866",
         longitude: "-115.900650",
+        parkCode: 'jotr',
+    },
+
+    {
+        name: "Channel Islands",
+        latitude: "33.998028",
+        longitude: "-119.772949",
+        parkCode: 'chis',
+    },
+
+    {
+        name: "Death Valley",
+        latitude: "36.5322649",
+        longitude: "-116.9325408",
+        parkCode: 'deva',
+    },
+
+    {
+        name: "Lassen Volcanic",
+        latitude: "	40.487777777778",
+        longitude: "-121.50388888889",
+        parkCode: 'lavo',
+    },
+
+    {
+        name: "Pinnacles",
+        latitude: "35.617134",
+        longitude: "-117.36836",
+        parkCode: 'pinn',
     }
+
 ];
+
+//Pulls NPS API data for clicked card
+let nps_loc = [];
+
+function selectPark(parkCode) {
+    api_key = 'WnxKQWqSaXwLvadioePDfDNoBEScjRDrJFaYgnhR';
+
+    fetch(
+            'https://developer.nps.gov/api/v1/parks?parkCode=' + parkCode + '&api_key=' + api_key
+        )
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            //General Park info
+            parkName = response.data[0].fullName;
+            parkDescr = response.data[0].description;
+            parkWeath = response.data[0].weatherInfo;
+            parkImg = response.data[0].images[0].url;
+            console.log(parkImg);
+
+            //When user clicks on NPS card, modal opens with information
+            displayModal(parkCode);
+
+        });
+};
+
+function displayModal(parkCode) {
+    var modal = document.getElementById("park-modal");
+    modal.style.display = "block";
+
+    //Add content to Modal
+    var modTitle = $(".modal-card-title");
+    modTitle.text(parkName);
+
+    var img = document.getElementById("image");
+    img.getElementsByTagName("img")[0].src = parkImg;
+
+    /* var loc = document.getElementById("location");
+     loc.innerHTML = 'Location: ' + parkAdd + ', ' + parkState;*/
+
+    var des = document.getElementById("description");
+    des.innerHTML = parkDescr;
+
+    var wea = document.getElementById("weather");
+    wea.innerHTML = 'Weather: ' + parkWeath;
+
+
+    var get = parks.find(element => element.parkCode === parkCode);
+    initMap(get.latitude, get.longitude);
+
+    //Close Modal
+    var button = document.getElementsByClassName("cancel")[0];
+    button.onclick = function() {
+        modal.style.display = "none";
+    }
+
+};
+
+//when the card-header(s) are clicked
+$(".is-linkable").on("click", function() {
+    var request = $(this).data("parkCode");
+    console.log(request);
+    selectPark(request);
+});
+
+//===============================================XXXXXXXXXXXXXXXXXXXXXXXXXXXX==============================================================
+var saved = {};
 
 initMap = function(latitude, longitude) {
     // Initialize the platform object:
@@ -67,6 +168,10 @@ function geoFindMe() {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
+    var hasName = (saved.name != null && saved.name != "");
+    var hasEmail = (saved.email != null && saved.email != "");
+
+    if (hasName && hasEmail) $(".user-info").css("display", "none");
 }
 
 document.querySelector('#find-me').addEventListener('click', geoFindMe);
@@ -91,22 +196,92 @@ compareLocations = (latitude, longitude) => {
 
     for (var i = 0; i < parks.length; ++i) {
         var distance = findDistance(latitude, longitude, parks[i].latitude, parks[i].longitude)
-        console.log(distance);
         parks[i].distance = distance;
     }
 
-    parks.sort(function(left, right) { return right.distance - left.distance });
+    parks.sort(function(left, right) { return left.distance - right.distance });
     displayParks();
 
 }
 
 
 displayParks = () => {
-    var closestCards = document.querySelectorAll(".closest-cards");
+    var closestCards = document.querySelectorAll(".closest-header");
+    var closestImages = document.querySelectorAll(".closest-image");
     for (var i = 0; i < closestCards.length; ++i) {
         closestCards[i].innerHTML = parks[i].name;
+        $(closestCards[i]).data("parkCode", parks[i].parkCode);
+        $(closestImages[i]).data("parkCode", parks[i].parkCode);
     }
     $(".nps-closest").css("display", "block");
+
+    var furthestCards = document.querySelectorAll(".furthest-header");
+    var furthestImages = document.querySelectorAll(".furthest-image");
+    for (var i = 0; i < furthestCards.length; ++i) {
+        furthestCards[i].innerHTML = parks[parks.length - 1 - i].name;
+        $(furthestCards[i]).data("parkCode", parks[parks.length - 1 - i].parkCode)
+        $(furthestImages[i]).data("parkCode", parks[i].parkCode);
+    }
+    $(".nps-furthest").css("display", "block");
 }
 
+var saveData = function() {
+    localStorage.setItem("saved", JSON.stringify(saved));
+};
+
+var loadData = function() {
+    saved = JSON.parse(localStorage.getItem("saved"));
+};
+
 //add span clickable icons: heart to save to local storage
+
+//submit button was clicked
+$("#submit").on("click", function() {
+
+    let form = document.getElementById('form');
+    let formData = new FormData(form);
+
+    saved.name = formData.get('name');
+    saved.email = formData.get('email');
+    saved.travelDate = formData.get('dates');
+    saveData();
+
+    $(".user-info").css("display", "none");
+});
+
+$("#changeuser").on("click", function() {
+    saved.name = null;
+    saved.email = null;
+    saved.travelDate = null;
+    saveData();
+    checkModal();
+});
+
+//only load modal when the user name doesn't exist or user is changed
+var checkModal = function() {
+    loadData();
+
+    var hasName = (saved.name != null && saved.name != "");
+    var hasEmail = (saved.email != null && saved.email != "");
+
+    if (hasName && hasEmail) {
+        $("#name").css("display", "none");
+        $("#email").css("display", "none");
+        $("#traveldates").css("display", "none");
+        $(".modal-card-foot").css("display", "none");
+
+    } else {
+        $("#name").css("display", "block");
+        $("#email").css("display", "block");
+        $("#traveldates").css("display", "block");
+        $(".modal-card-foot").css("display", "block");
+        $(".user-info").css("display", "flex");
+    }
+}
+
+$(".delete").on("click", function() {
+    $(".modal").css("display", "none");
+    document.getElementById("mapContainer").innerHTML = '';
+});
+
+checkModal();

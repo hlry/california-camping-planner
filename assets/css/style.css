@@ -7,8 +7,8 @@ section {
        * element that contains the map. */
 
 #mapContainer {
-    width: 640px;
-    height: 480px;
+    width: 600px;
+    height: 440px;
 }
 
 
@@ -28,11 +28,30 @@ html body {
     display: none;
 }
 
-.start-button {
+.modal {
     display: flex;
-    justify-content: space-around;
 }
 
-#img-btn {
-    border: none;
+.user {
+    text-align: right;
+}
+
+.heart {
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.heart:hover {
+    opacity: 1;
+}
+
+#park-modal {
+    display: none;
+}
+
+h2 {
+    margin: 20px;
+    padding: 8px;
+    font-size: larger;
+    font-weight: bold;
 }
