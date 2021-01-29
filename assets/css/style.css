@@ -20,6 +20,14 @@ html body {
     padding: 0;
 }
 
+.card-image {
+    opacity: 0.8;
+}
+
+.card-image:hover {
+    opacity: 1;
+}
+
 .nps-closest {
     display: none;
 }
@@ -37,7 +45,7 @@ html body {
 }
 
 .heart {
-    opacity: 0.6;
+    opacity: 0.3;
     transition: 0.3s;
 }
 

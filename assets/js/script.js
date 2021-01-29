@@ -3,6 +3,7 @@ var parks = [{
         latitude: "37.756718",
         longitude: "-119.596848",
         parkCode: 'yose',
+        src: "./assets/images/parks/yosemite/yosemite.jpg"
     },
 
     {
@@ -10,6 +11,7 @@ var parks = [{
         latitude: "36.4333166",
         longitude: "-118.6836173",
         parkCode: 'seki',
+        src: "./assets/images/parks/sequoia/Kings.jpg"
     },
 
     {
@@ -17,6 +19,7 @@ var parks = [{
         latitude: "41.213181",
         longitude: "-124.004631",
         parkCode: 'redw',
+        src: "./assets/images/parks/redwood/redwoods.jpg"
     },
 
     {
@@ -24,6 +27,7 @@ var parks = [{
         latitude: "33.881866",
         longitude: "-115.900650",
         parkCode: 'jotr',
+        src: "./assets/images/parks/joshua/joshua.jpg"
     },
 
     {
@@ -31,6 +35,7 @@ var parks = [{
         latitude: "33.998028",
         longitude: "-119.772949",
         parkCode: 'chis',
+        src: "./assets/images/parks/channel/channelislands.jpg"
     },
 
     {
@@ -38,6 +43,7 @@ var parks = [{
         latitude: "36.5322649",
         longitude: "-116.9325408",
         parkCode: 'deva',
+        src: "./assets/images/parks/death/deathvalley2.jpg"
     },
 
     {
@@ -45,6 +51,7 @@ var parks = [{
         latitude: "	40.487777777778",
         longitude: "-121.50388888889",
         parkCode: 'lavo',
+        src: "./assets/images/parks/lassen/lassen.jpg"
     },
 
     {
@@ -52,6 +59,7 @@ var parks = [{
         latitude: "35.617134",
         longitude: "-117.36836",
         parkCode: 'pinn',
+        src: "./assets/images/parks/pinnacles/pinnacles2.jpg"
     }
 
 ];
@@ -116,13 +124,14 @@ function displayModal(parkCode) {
 
 //when the card-header(s) are clicked
 $(".is-linkable").on("click", function() {
-    var request = $(this).data("parkCode");
+    var request = $(this).closest(".column").data("parkCode");
     console.log(request);
     selectPark(request);
 });
 
 //===============================================XXXXXXXXXXXXXXXXXXXXXXXXXXXX==============================================================
 var saved = {};
+var liked = [""];
 
 initMap = function(latitude, longitude) {
     // Initialize the platform object:
@@ -206,31 +215,39 @@ compareLocations = (latitude, longitude) => {
 
 
 displayParks = () => {
+
     var closestCards = document.querySelectorAll(".closest-header");
+    var closestColumn = document.querySelectorAll(".closest-column");
     var closestImages = document.querySelectorAll(".closest-image");
+
     for (var i = 0; i < closestCards.length; ++i) {
         closestCards[i].innerHTML = parks[i].name;
-        $(closestCards[i]).data("parkCode", parks[i].parkCode);
-        $(closestImages[i]).data("parkCode", parks[i].parkCode);
+        $(closestColumn[i]).data("parkCode", parks[i].parkCode);
+        $(closestImages[i]).attr("src", parks[i].src)
     }
     $(".nps-closest").css("display", "block");
 
     var furthestCards = document.querySelectorAll(".furthest-header");
+    var furthestColumn = document.querySelectorAll(".furthest-column");
     var furthestImages = document.querySelectorAll(".furthest-image");
+
     for (var i = 0; i < furthestCards.length; ++i) {
         furthestCards[i].innerHTML = parks[parks.length - 1 - i].name;
-        $(furthestCards[i]).data("parkCode", parks[parks.length - 1 - i].parkCode)
-        $(furthestImages[i]).data("parkCode", parks[i].parkCode);
+        $(furthestColumn[i]).data("parkCode", parks[parks.length - 1 - i].parkCode)
+        $(furthestImages[i]).attr("src", parks[parks.length - 1 - i].src)
     }
     $(".nps-furthest").css("display", "block");
 }
 
 var saveData = function() {
     localStorage.setItem("saved", JSON.stringify(saved));
+    localStorage.setItem("liked", JSON.stringify(liked));
 };
 
 var loadData = function() {
     saved = JSON.parse(localStorage.getItem("saved"));
+    liked = JSON.parse(localStorage.getItem("liked"));
+    if (liked === null) liked = [];
 };
 
 //add span clickable icons: heart to save to local storage
@@ -283,5 +300,27 @@ $(".delete").on("click", function() {
     $(".modal").css("display", "none");
     document.getElementById("mapContainer").innerHTML = '';
 });
+
+$(".heart").on("click", function() {
+
+    var parkCode = $(this).closest(".column").data("parkCode");
+    const found = liked.findIndex(element => element === parkCode);
+
+    if (found != -1) {
+        $(this).css("opacity", "0.3");
+        liked[found] = null;
+        saveData();
+        //convert liked into an object
+    } else {
+        $(this).css("opacity", "1");
+        var likedHeader = $(this).closest(".column").data("parkCode");
+        console.log(likedHeader);
+        liked.push(likedHeader);
+        saveData();
+    }
+
+});
+
+
 
 checkModal();
