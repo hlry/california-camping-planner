@@ -248,6 +248,7 @@ var loadData = function() {
     saved = JSON.parse(localStorage.getItem("saved"));
     liked = JSON.parse(localStorage.getItem("liked"));
     if (liked === null) liked = [];
+    if (saved === null) saved = {};
 };
 
 //add span clickable icons: heart to save to local storage
@@ -259,6 +260,7 @@ $("#submit").on("click", function() {
     let formData = new FormData(form);
 
     saved.name = formData.get('name');
+    console.log(formData.get('name'));
     saved.email = formData.get('email');
     saved.travelDate = formData.get('dates');
     saveData();
