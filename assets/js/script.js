@@ -1,3 +1,6 @@
+//acts like a local database
+//stores all park info
+//any new park objects will be added here
 var parks = [{
         name: "Yosemite",
         latitude: "37.756718",
@@ -82,8 +85,6 @@ function selectPark(parkCode) {
             parkDescr = response.data[0].description;
             parkWeath = response.data[0].weatherInfo;
             parkImg = response.data[0].images[0].url;
-            console.log(parkImg);
-
             //When user clicks on NPS card, modal opens with information
             displayModal(parkCode);
 
@@ -104,12 +105,11 @@ function displayModal(parkCode) {
     /* var loc = document.getElementById("location");
      loc.innerHTML = 'Location: ' + parkAdd + ', ' + parkState;*/
 
-    var des = document.getElementById("description");
+    var des = document.getElementById("description-p");
     des.innerHTML = parkDescr;
 
-    var wea = document.getElementById("weather");
-    wea.innerHTML = 'Weather: ' + parkWeath;
-
+    var wea = document.getElementById("weather-p");
+    wea.innerHTML = parkWeath;
 
     var get = parks.find(element => element.parkCode === parkCode);
     initMap(get.latitude, get.longitude);
@@ -213,26 +213,26 @@ compareLocations = (latitude, longitude) => {
 
 }
 
-
+//populating the closest and farthest cards
 displayParks = () => {
 
-    var closestCards = document.querySelectorAll(".closest-header");
+    var closestCards = document.querySelectorAll(".closest-header-title"); //console.log(closestCards): headings of all the cards in the closest section
     var closestColumn = document.querySelectorAll(".closest-column");
     var closestImages = document.querySelectorAll(".closest-image");
 
     for (var i = 0; i < closestCards.length; ++i) {
-        closestCards[i].innerHTML = parks[i].name;
+        $(closestCards[i]).text(parks[i].name);
         $(closestColumn[i]).data("parkCode", parks[i].parkCode);
-        $(closestImages[i]).attr("src", parks[i].src)
+        $(closestImages[i]).attr("src", parks[i].src);
     }
     $(".nps-closest").css("display", "block");
 
-    var furthestCards = document.querySelectorAll(".furthest-header");
+    var furthestCards = document.querySelectorAll(".furthest-header-title");
     var furthestColumn = document.querySelectorAll(".furthest-column");
     var furthestImages = document.querySelectorAll(".furthest-image");
 
     for (var i = 0; i < furthestCards.length; ++i) {
-        furthestCards[i].innerHTML = parks[parks.length - 1 - i].name;
+        $(furthestCards[i]).text(parks[parks.length - 1 - i].name);
         $(furthestColumn[i]).data("parkCode", parks[parks.length - 1 - i].parkCode)
         $(furthestImages[i]).attr("src", parks[parks.length - 1 - i].src)
     }
@@ -322,7 +322,6 @@ $(".heart").on("click", function() {
     }
 
 });
-
 
 
 checkModal();
