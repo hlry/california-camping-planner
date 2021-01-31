@@ -63,3 +63,11 @@ h2 {
     font-size: larger;
     font-weight: bold;
 }
+
+#description {}
+
+#weather {}
+
+h3 {
+    font-weight: bold;
+}
