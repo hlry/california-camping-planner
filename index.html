@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    </link>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <title>California NPS Planner</title>
+</head>
+
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="loading.html">
+                <img src="./assets/images/app-logo.png" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary" id="changeuser">
+                        <strong>Change User</strong>
+                    </a>
+                    <a class="button is-light">
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero with Title of Page -->
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+
+                    California Park Planner
+
+                </h1>
+                <h2 class="subtitle">
+                    Your guide to our National Parks
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form for campers to complete their information -->
+    <div class="modal user-info">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">User Information</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Content ... -->
+                <form id="form">
+
+                    <div class="form-group" id="name">
+                        <label for="name">Enter name:</label>
+                        <input type="text" placeholder="Your Name" name="name" id="name" />
+                    </div>
+
+
+                    <div class="form-group" id="email">
+                        <label for="email">Enter email address:</label>
+                        <input type="email" placeholder="Email Address" name="email" id="email" />
+                    </div>
+
+
+                    <div class="form-group" id="traveldates">
+                        <label for="dates">Travel Dates:</label>
+                        <input type="date" placeholder="MM-DD-YYYY" name="dates" id="dates" />
+                    </div>
+
+
+                    <div class="form-group" id="location">
+                        <label for="loc">Location</label>
+                        <button id="find-me" type="button">Show my location</button><br />
+                        <p id="status"></p>
+                        <a id="map-link" target="_blank"></a>
+                    </div>
+                </form>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="submit">Submit</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <section class="nps-closest">
+        <h2>Closest</h2>
+        <div class="container">
+            <div class="closest columns">
+                <!-- Add cards for National Parks -->
+                <div class="closest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title closest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="closest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+
+                <div class="closest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title closest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="closest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+
+                <div class="closest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title closest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="closest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer>
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nps-furthest">
+        <h2>Farthest</h2>
+        <div class="container">
+            <div class="furthest columns">
+                <div class="furthest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title furthest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="furthest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+                <div class="furthest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title furthest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="furthest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+                <div class="furthest-column column">
+                    <div class="card box">
+
+                        <header class="card-header is-linkable">
+                            <p class="card-header-title furthest-header-title"></p>
+                        </header>
+
+                        <div class="card-image">
+                            <figure class="image is-4by3 is-linkable">
+                                <img class="furthest-image" alt="Placeholder image">
+                            </figure>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a>
+                                <span>
+                                    <svg class="heart" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                        height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                            stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                            font-weight="none" font-size="none" text-anchor="none"
+                                            style="mix-blend-mode: normal">
+                                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#2ecc71">
+                                                <path
+                                                    d="M136.88333,24.725c-17.91667,-7.16667 -37.26667,-2.15 -49.80833,10.75c-11.825,-12.9 -30.81667,-17.91667 -48.375,-11.46667c-23.29167,8.95833 -35.11667,34.75833 -26.51667,57.69167c15.40833,41.925 73.1,68.8 73.1,68.8h0.71667c0,0 59.125,-25.08333 75.96667,-67.00833c8.95833,-22.93333 -2.15,-49.45 -25.08333,-58.76667z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </footer>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="park-info">
+        <!-- Modal Pop Up when NP is clicked -->
+        <div class="modal" id="park-modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head" id="modal-card-head">
+                    <p class="modal-card-title"></p>
+
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div id="image"> <img src=''></div>
+
+                    <div id="description">
+                        <h3>Description</h3>
+                        <p id="description-p"></p>
+                    </div>
+                    <br>
+                    <div id="weather">
+                        <h3>Weather</h3>
+                        <p id="weather-p"></p>
+                    </div>
+                    <br>
+                    <!--Map Container-->
+                    <div id="mapContainer"></div>
+
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Save changes</button>
+                    <button class="button cancel">Cancel</button>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>California NPS Planner</strong> by <a href="https://github.com/T-98">Divyansh Khare</a>, <a
+                    href="https://github.com/oliviafaraone">Olivia Faraone</a>, and <a
+                    href="https://github.com/hlry">Hilary Richardson</a>. Copyright 2021, all rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

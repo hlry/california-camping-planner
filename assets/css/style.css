@@ -1,0 +1,73 @@
+section {
+    margin-bottom: 20px;
+}
+
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+#mapContainer {
+    width: 600px;
+    height: 440px;
+}
+
+
+/* Optional: Makes the sample page fill the window. */
+
+html body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.card-image {
+    opacity: 0.8;
+}
+
+.card-image:hover {
+    opacity: 1;
+}
+
+.nps-closest {
+    display: none;
+}
+
+.nps-furthest {
+    display: none;
+}
+
+.modal {
+    display: flex;
+}
+
+.user {
+    text-align: right;
+}
+
+.heart {
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.heart:hover {
+    opacity: 1;
+}
+
+#park-modal {
+    display: none;
+}
+
+h2 {
+    margin: 20px;
+    padding: 8px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#description {}
+
+#weather {}
+
+h3 {
+    font-weight: bold;
+}
